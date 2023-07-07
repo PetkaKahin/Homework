@@ -5,11 +5,13 @@ namespace Weapon
 {
     public class WeaponChenger : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _weapons = new List<GameObject>();
+        [SerializeField] private List<BaseShootingWeapon> _weapons = new List<BaseShootingWeapon>();
 
-        [SerializeField] private GameObject _currentWeapon;
+        [SerializeField] private Shooter _shooter;
 
         [SerializeField] private int _weaponIndex = 0;
+
+        private GameObject _currentWeapon;
 
         private void Start()
         {
@@ -43,7 +45,9 @@ namespace Weapon
             if (_currentWeapon != null)
                 Destroy(_currentWeapon);
 
-            _currentWeapon = Instantiate(_weapons[weaponIndex], transform);
+            _currentWeapon = Instantiate(_weapons[weaponIndex].gameObject, _shooter.transform);
+
+            _shooter.SetWeapon(_currentWeapon.GetComponent<BaseShootingWeapon>()); 
         }
     }
 }

@@ -96,5 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20493554c6591954ba131cf8d0c94c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeBetweenShoting: 0.15
-  Bullet: {fileID: 1561855615508388041, guid: 13234f2f57b282444bb405f1e50474f1, type: 3}
+  <TimeBetweenShoting>k__BackingField: 0.11
+  Bullet: {fileID: -121228355309773010, guid: 13234f2f57b282444bb405f1e50474f1, type: 3}

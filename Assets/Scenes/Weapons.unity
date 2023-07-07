@@ -633,7 +633,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1777130860}
-  - component: {fileID: 1777130864}
+  - component: {fileID: 1777130865}
+  - component: {fileID: 1777130866}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -656,7 +657,20 @@ Transform:
   m_Father: {fileID: 730281745}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1777130864
+--- !u!114 &1777130865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777130859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa296635e107deb4688a1f3cf2e955f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 0}
+--- !u!114 &1777130866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -669,8 +683,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons:
-  - {fileID: 6750618869277964899, guid: e52184859959a0e47b421c1e514d2784, type: 3}
-  - {fileID: 4389916108700051280, guid: 0dd5fed515d6ca742a0d732d77403bac, type: 3}
-  - {fileID: 4532553326220128332, guid: 68586af3ec01d5e4ba3830ccaea086ce, type: 3}
-  _currentWeapon: {fileID: 0}
+  - {fileID: 7409713031168656574, guid: e52184859959a0e47b421c1e514d2784, type: 3}
+  - {fileID: 6392582632380998075, guid: 0dd5fed515d6ca742a0d732d77403bac, type: 3}
+  - {fileID: 4758481016611951829, guid: 68586af3ec01d5e4ba3830ccaea086ce, type: 3}
+  _shooter: {fileID: 1777130865}
   _weaponIndex: 0

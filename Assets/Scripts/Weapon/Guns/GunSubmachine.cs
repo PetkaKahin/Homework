@@ -5,28 +5,45 @@ namespace Weapon
 {
     public class GunSubmachine : BaseShootingWeapon
     {
+        [SerializeField] [Range(0.1f, 2f)] private float _TimeBetweenMultipleShot;
         [SerializeField] [Range(1, 5)] private int _countShoting;
 
-        private bool _isShoting = false;
+        private bool _isMultipleShot = false;
 
-        protected override void Shot()
+        public override void Shot()
         {
-            if (Input.GetMouseButtonDown(0) && !_isShoting)
+            if (IsCanShot)
                 StartCoroutine(MultipleShot(_countShoting, TimeBetweenShoting));
+
+            IsCanShot = false;
+        }
+
+        protected override void ChekRecharge()
+        {
+            if (!_isMultipleShot)
+            {
+                if (Timer >= _TimeBetweenMultipleShot)
+                {
+                    IsCanShot = true;
+                    ResetTimer();
+                }
+            }
         }
 
         private IEnumerator MultipleShot(int count, float delay)
         {
-            _isShoting = true;
+            _isMultipleShot = true;
 
             for (int i = 0; i < count; i++)
             {
-                Instantiate(Bullet, transform);
-                
+                CreateBullet(transform);
+
                 yield return new WaitForSeconds(delay);
             }
 
-            _isShoting = false;
+            _isMultipleShot = false;
+
+            ResetTimer();
         }
     }
 }
