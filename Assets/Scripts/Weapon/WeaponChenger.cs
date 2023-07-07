@@ -6,13 +6,11 @@ namespace Weapon
     public class WeaponChenger : MonoBehaviour
     {
         [SerializeField] private List<BaseShootingWeapon> _weapons = new List<BaseShootingWeapon>();
-
+        
         [SerializeField] private Shooter _shooter;
 
         [SerializeField] private int _weaponIndex = 0;
-
-        private GameObject _currentWeapon;
-
+        
         private void Start()
         {
             SwitchWeapon(_weaponIndex);
@@ -42,12 +40,7 @@ namespace Weapon
 
         private void SwitchWeapon(int weaponIndex)
         {
-            if (_currentWeapon != null)
-                Destroy(_currentWeapon);
-
-            _currentWeapon = Instantiate(_weapons[weaponIndex].gameObject, _shooter.transform);
-
-            _shooter.SetWeapon(_currentWeapon.GetComponent<BaseShootingWeapon>()); 
+            _shooter.SetWeapon(_weapons[weaponIndex]); 
         }
     }
 }

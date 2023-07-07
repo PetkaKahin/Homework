@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Weapon
+﻿namespace Weapon
 {
     public class GunMachine : BaseShootingWeapon
     {

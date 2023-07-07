@@ -19,30 +19,29 @@ namespace Weapon
             ChekRecharge();
         }
 
+        public void StartShot() => IsCanShot = false;
+
+        public void EndShot()
+        {
+            IsCanShot = true;
+            ResetTimer();
+        }
+
         public virtual void Shot()
         {
             if (!IsCanShot)
                 return;
-
-            IsCanShot = false;
-
+            
+            StartShot();
             CreateBullet(transform);
-            ResetTimer();
         }
 
         protected virtual void ChekRecharge()
         {
-            
             if (Timer >= TimeBetweenShoting)
             {
-                ResetTimer();
-                IsCanShot = true;
+                EndShot();
             }
-        }
-
-        protected void ResetTimer()
-        {
-            Timer = 0;
         }
 
         protected void CreateBullet(Transform position)
@@ -51,6 +50,11 @@ namespace Weapon
                 throw new NullReferenceException("Bullet");
 
             Instantiate(Bullet.gameObject, position);
+        }
+
+        private void ResetTimer()
+        {
+            Timer = 0;
         }
     }
 }

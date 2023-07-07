@@ -8,31 +8,17 @@ namespace Weapon
         [SerializeField] [Range(0.1f, 2f)] private float _TimeBetweenMultipleShot;
         [SerializeField] [Range(1, 5)] private int _countShoting;
 
-        private bool _isMultipleShot = false;
-
         public override void Shot()
         {
             if (IsCanShot)
                 StartCoroutine(MultipleShot(_countShoting, TimeBetweenShoting));
-
-            IsCanShot = false;
         }
 
-        protected override void ChekRecharge()
-        {
-            if (!_isMultipleShot)
-            {
-                if (Timer >= _TimeBetweenMultipleShot)
-                {
-                    IsCanShot = true;
-                    ResetTimer();
-                }
-            }
-        }
+        protected override void ChekRecharge() { }
 
         private IEnumerator MultipleShot(int count, float delay)
         {
-            _isMultipleShot = true;
+            StartShot();
 
             for (int i = 0; i < count; i++)
             {
@@ -41,9 +27,9 @@ namespace Weapon
                 yield return new WaitForSeconds(delay);
             }
 
-            _isMultipleShot = false;
+            yield return new WaitForSeconds(_TimeBetweenMultipleShot);
 
-            ResetTimer();
+            EndShot();
         }
     }
 }

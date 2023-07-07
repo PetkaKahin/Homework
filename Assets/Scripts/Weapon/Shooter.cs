@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Weapon
 {
@@ -7,46 +6,35 @@ namespace Weapon
     {
         private BaseShootingWeapon _weapon;
 
-        private Action _clickedMouseAction;
+        private IClickMouseHeandler _mouseHeandler;
 
         private void Update()
         {
-            _clickedMouseAction?.Invoke();
+            if (_mouseHeandler.MosueClick(0))
+                _weapon.Shot();
         }
 
         public void SetWeapon(BaseShootingWeapon weapon)
         {
+            if (_weapon != null)
+                Destroy(_weapon.gameObject);
+
+            BaseShootingWeapon NewWeapon = Instantiate(weapon.gameObject, transform).GetComponent<BaseShootingWeapon>();
+
             switch (weapon)
             {
                 case Gun:
-                    _clickedMouseAction = ShotOnMouseDown;
+                    _mouseHeandler = new MouseDownHeandler();
                     break;
                 case GunMachine:
-                    _clickedMouseAction = ShotingOnMouseDown;
+                    _mouseHeandler = new MouseLongDonwHeandler();
                     break;
                 case GunSubmachine:
-                    _clickedMouseAction = ShotOnMouseDown;
+                    _mouseHeandler = new MouseDownHeandler();
                     break;
             }
 
-            _weapon = weapon;
-        }
-
-        private void ShotOnMouseDown()
-        {
-            if (Input.GetMouseButtonDown(0))
-                _weapon.Shot();
-        }
-
-        private void ShotingOnMouseDown()
-        {
-            if (Input.GetMouseButton(0))
-                _weapon.Shot();
-        }
-
-        private void OnDestroy()
-        {
-            _clickedMouseAction = null;
+            _weapon = NewWeapon;
         }
     }
 }
