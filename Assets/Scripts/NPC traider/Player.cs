@@ -4,8 +4,8 @@ namespace NPC_traider
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] [Range(1, 25)] float _speed;
-        [SerializeField] [Range(0, 10)] private int _reputation;
+        [SerializeField] [Range(1, 25)] private float _speed;
+        [field: SerializeField, Range(ITrader.MinReputation, ITrader.MaxReputation)] public int Reputation { get; private set; }
 
         private Vector3 _direction;
 
@@ -21,17 +21,7 @@ namespace NPC_traider
         {
             if (other.TryGetComponent(out TraiderNPC traider))
             {
-                if (_reputation > 7)
-                {
-                    traider.Trade(new ArmorTrade());
-                    return;
-                }
-                if (_reputation > 3)
-                {
-                    traider.Trade(new FruitsTrade());
-                    return;
-                }   
-                traider.Trade(new NoTrade());
+                traider.Trade(Reputation);
             }
         }
     }

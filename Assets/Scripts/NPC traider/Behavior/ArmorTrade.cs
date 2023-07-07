@@ -2,7 +2,7 @@
 
 namespace NPC_traider
 {
-    public class ArmorTrade : ITrade
+    public class ArmorTrade : ITrader
     {
         public void Trade()
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NPC_traider
 {
-    public class NoTrade : ITrade
+    public class NoTrade : ITrader
     {
         public void Trade()
         {
