@@ -2,7 +2,7 @@
 
 namespace NPC_traider
 {
-    public class NormalTraider : TraiderNPC
+    public class NormalTrader : TraderNPC
     {
         [SerializeField][Range(ITrader.MinReputation, ITrader.MaxReputation)] private int _requiredReputetionForFrutis;
         [SerializeField][Range(ITrader.MinReputation, ITrader.MaxReputation)] private int _requiredReputetionForArmor;

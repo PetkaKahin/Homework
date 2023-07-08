@@ -6,35 +6,30 @@ namespace Weapon
     {
         private BaseShootingWeapon _weapon;
 
-        private IClickMouseHeandler _mouseHeandler;
+        private IClickMouseHandler _mouseHandler;
 
         private void Update()
         {
-            if (_mouseHeandler.MosueClick(0))
+            if (_mouseHandler.MosueClick(IClickMouseHandler.LeftBatton))
                 _weapon.Shot();
         }
 
         public void SetWeapon(BaseShootingWeapon weapon)
         {
-            if (_weapon != null)
-                Destroy(_weapon.gameObject);
-
-            BaseShootingWeapon NewWeapon = Instantiate(weapon.gameObject, transform).GetComponent<BaseShootingWeapon>();
+            _weapon = weapon;
 
             switch (weapon)
             {
                 case Gun:
-                    _mouseHeandler = new MouseDownHeandler();
+                    _mouseHandler = new MouseDownHandler();
                     break;
                 case GunMachine:
-                    _mouseHeandler = new MouseLongDonwHeandler();
+                    _mouseHandler = new MouseLongDonwHandler();
                     break;
                 case GunSubmachine:
-                    _mouseHeandler = new MouseDownHeandler();
+                    _mouseHandler = new MouseDownHandler();
                     break;
             }
-
-            _weapon = NewWeapon;
         }
     }
 }

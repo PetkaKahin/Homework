@@ -2,7 +2,7 @@
 
 namespace NPC_traider
 {
-    public abstract class TraiderNPC : MonoBehaviour
+    public abstract class TraderNPC : MonoBehaviour
     {
         public virtual void Trade(int reputation)
         {

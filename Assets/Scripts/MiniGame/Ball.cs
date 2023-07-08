@@ -6,12 +6,13 @@ namespace MiniGame
     public class Ball : MonoBehaviour
     {
         [field: SerializeField] public BallType Type { get; private set; }
-        public Ball(BallType type)
+
+        public void Inicialize(BallType type)
         {
             Type = type;
         }
 
-        public void DestroyedBall()
+        public void DestroyBall()
         {
             Destroy(gameObject);
         }

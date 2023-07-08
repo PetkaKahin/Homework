@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a240f465b84a1314fabebf605fd9da5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballHeandler: {fileID: 1529302223}
+  _ballHandler: {fileID: 1529302223}
   _clicker: {fileID: 1529302221}
   _endGameMenu: {fileID: 1529302225}
 --- !u!114 &1529302225

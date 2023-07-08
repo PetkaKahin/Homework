@@ -3,17 +3,19 @@ using UnityEngine;
 
 namespace MiniGame
 {
-    public class BallHeandler : MonoBehaviour
+    public class BallHandler : MonoBehaviour
     {
         [SerializeField] private Clicker _cliker;
         [field: SerializeField] public List<Ball> Balls { get; private set; } = new List<Ball>();
 
-        public int CountDestroyedBalls { get; private set; } = 0;
+        public int CountDestroyBalls { get; private set; } = 0;
         public BallType DestroedBallType { get; private set; }
 
         public void CreateBall(BallType ballType, Transform parent) // типа будет использоваться в будущем, например при генерации шариков
         {
-            Balls.Add(new Ball(ballType));
+            Balls.Add(new Ball());
+
+            Balls[Balls.Count].Inicialize(ballType);
 
             Instantiate(Balls[Balls.Count], parent);
         }
@@ -33,7 +35,7 @@ namespace MiniGame
 
         private void AddDestroyBall(BallType ballType)
         {
-            CountDestroyedBalls++;
+            CountDestroyBalls++;
             DestroedBallType = ballType;
         }
 

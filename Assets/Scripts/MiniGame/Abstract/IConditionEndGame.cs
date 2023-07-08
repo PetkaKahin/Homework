@@ -9,9 +9,9 @@ namespace MiniGame
 
         event Action<string> EventGameEnded;
 
-        BallHeandler BallHeandler { get; }
+        BallHandler BallHandler { get; }
 
         void ChekGameEnd();
-        void SetBallHeandler(BallHeandler ballHeandler);
+        void SetBallHandler(BallHandler ballHeandler);
     }
 }

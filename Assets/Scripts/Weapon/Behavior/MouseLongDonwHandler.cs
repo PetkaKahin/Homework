@@ -2,11 +2,11 @@
 
 namespace Weapon
 {
-    public class MouseDownHeandler : IClickMouseHeandler
+    public class MouseLongDonwHandler : IClickMouseHandler
     {
         public bool MosueClick(int mouseButton)
         {
-            if (Input.GetMouseButtonDown(mouseButton)) 
+            if (Input.GetMouseButton(mouseButton))
                 return true;
 
             return false;

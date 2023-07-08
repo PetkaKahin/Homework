@@ -19,7 +19,7 @@ namespace NPC_traider
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out TraiderNPC traider))
+            if (other.TryGetComponent(out TraderNPC traider))
             {
                 traider.Trade(Reputation);
             }

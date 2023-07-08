@@ -4,42 +4,35 @@ namespace MiniGame
 {
     public class GameOver : MonoBehaviour
     {
-        [SerializeField] private BallHeandler _ballHeandler;
+        [SerializeField] private BallHandler _ballHandler;
         [SerializeField] private Clicker _clicker;
         [SerializeField] private EndGameMenu _endGameMenu;
 
-        private static IConditionEndGame _conditionEndGame; // статический для записи из другой сцены
+        public static IConditionEndGame ConditionEndGame { get; private set; } = new WinToAllColorDestroy(); // статический для записи из другой сцены
 
         private void Awake()
         {
-            _conditionEndGame.SetBallHeandler(_ballHeandler);
-        }
-
-        public void CheckGameEnded()
-        {
-            _conditionEndGame.ChekGameEnd();
+            ConditionEndGame.SetBallHandler(_ballHandler);
         }
 
         public static void SetConditionWin(IConditionEndGame condition) // статический для записи из другой сцены
         {
-            _conditionEndGame = condition;
+            ConditionEndGame = condition;
         }
 
-        private void GameEnded(string messageEndGame)
+        private void GameEnd(string messageEndGame)
         {
             _endGameMenu.SetActiveMenu(messageEndGame);
         }
 
         private void OnEnable()
         {
-            _clicker.EventDestroyed += CheckGameEnded;
-            _conditionEndGame.EventGameEnded += GameEnded;
+            ConditionEndGame.EventGameEnded += GameEnd;
         }
 
         private void OnDisable()
         {
-            _clicker.EventDestroyed -= CheckGameEnded;
-            _conditionEndGame.EventGameEnded -= GameEnded;
+            ConditionEndGame.EventGameEnded -= GameEnd;
         }
     }
 }

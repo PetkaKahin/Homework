@@ -5,23 +5,23 @@ namespace MiniGame
     public class WinToOneColorDestroy : IConditionEndGame
     {
         private BallType? _ballTypeForWin = null;
-        private BallType _destroyedBallType;
+        private BallType _destroyBallType;
 
         private int _countBallType = 0;
-        private int _countDestroyedBallType = 0;
+        private int _countDestroyBallType = 0;
 
         public event Action<string> EventGameEnded;
 
-        public BallHeandler BallHeandler { get; private set; }
+        public BallHandler BallHandler { get; private set; }
 
         public void ChekGameEnd()
         {
-            SetDestroyBallType(BallHeandler.DestroedBallType);
-            _countDestroyedBallType = BallHeandler.CountDestroyedBalls;
+            SetDestroyBallType(BallHandler.DestroedBallType);
+            _countDestroyBallType = BallHandler.CountDestroyBalls;
 
-            if (_destroyedBallType == _ballTypeForWin)
+            if (_destroyBallType == _ballTypeForWin)
             {
-                if (_countBallType == _countDestroyedBallType)
+                if (_countBallType == _countDestroyBallType)
                 {
                     EventGameEnded?.Invoke(IConditionEndGame.WinText);
                 }
@@ -32,9 +32,9 @@ namespace MiniGame
             EventGameEnded?.Invoke(IConditionEndGame.DefeatText);
         }
 
-        public void SetBallHeandler(BallHeandler ballHeandler)
+        public void SetBallHandler(BallHandler ballHeandler)
         {
-            BallHeandler = ballHeandler;
+            BallHandler = ballHeandler;
         }
 
         private void SetDestroyBallType(BallType ballType)
@@ -42,10 +42,10 @@ namespace MiniGame
             if (_ballTypeForWin == null)
             {
                 _ballTypeForWin = ballType;
-                _countBallType = BallHeandler.CountBallOfBallType(ballType);
+                _countBallType = BallHandler.CountBallOfBallType(ballType);
             }
 
-            _destroyedBallType = ballType;
+            _destroyBallType = ballType;
         }
     }
 }

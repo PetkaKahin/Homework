@@ -9,8 +9,10 @@ namespace Weapon
         
         [SerializeField] private Shooter _shooter;
 
-        [SerializeField] private int _weaponIndex = 0;
-        
+        private BaseShootingWeapon _curruntWeapon;
+
+        private int _weaponIndex = 0;
+
         private void Start()
         {
             SwitchWeapon(_weaponIndex);
@@ -40,7 +42,12 @@ namespace Weapon
 
         private void SwitchWeapon(int weaponIndex)
         {
-            _shooter.SetWeapon(_weapons[weaponIndex]); 
+            if (_curruntWeapon != null)
+                Destroy(_curruntWeapon.gameObject);
+
+            _curruntWeapon = Instantiate(_weapons[weaponIndex], _shooter.transform);
+
+            _shooter.SetWeapon(_curruntWeapon); 
         }
     }
 }

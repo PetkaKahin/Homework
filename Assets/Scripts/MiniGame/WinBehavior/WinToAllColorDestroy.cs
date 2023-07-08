@@ -4,19 +4,19 @@ namespace MiniGame
 {
     public class WinToAllColorDestroy : IConditionEndGame
     {
-        public BallHeandler BallHeandler { get; private set; }
+        public BallHandler BallHandler { get; private set; }
 
         public event Action<string> EventGameEnded;
 
         public void ChekGameEnd()
         {
-            if (BallHeandler.CountDestroyedBalls >= BallHeandler.Balls.Count)
+            if (BallHandler.CountDestroyBalls >= BallHandler.Balls.Count)
                 EventGameEnded?.Invoke(IConditionEndGame.WinText);
         }
 
-        public void SetBallHeandler(BallHeandler ballHeandler)
+        public void SetBallHandler(BallHandler ballHeandler)
         {
-            BallHeandler = ballHeandler;
+            BallHandler = ballHeandler;
         }
     }
 }
