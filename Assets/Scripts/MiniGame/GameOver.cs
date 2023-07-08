@@ -5,6 +5,7 @@ namespace MiniGame
     public class GameOver : MonoBehaviour
     {
         [SerializeField] private BallHeandler _ballHeandler;
+        [SerializeField] private Clicker _clicker;
         [SerializeField] private EndGameMenu _endGameMenu;
 
         private static IConditionEndGame _conditionEndGame; // статический для записи из другой сцены
@@ -16,7 +17,7 @@ namespace MiniGame
 
         public void CheckGameEnded()
         {
-            _conditionEndGame.ChekEndWin();
+            _conditionEndGame.ChekGameEnd();
         }
 
         public static void SetConditionWin(IConditionEndGame condition) // статический для записи из другой сцены
@@ -31,13 +32,13 @@ namespace MiniGame
 
         private void OnEnable()
         {
-            Ball.EventDestroyedAction += CheckGameEnded;
+            _clicker.EventDestroyed += CheckGameEnded;
             _conditionEndGame.EventGameEnded += GameEnded;
         }
 
         private void OnDisable()
         {
-            Ball.EventDestroyedAction -= CheckGameEnded;
+            _clicker.EventDestroyed -= CheckGameEnded;
             _conditionEndGame.EventGameEnded -= GameEnded;
         }
     }

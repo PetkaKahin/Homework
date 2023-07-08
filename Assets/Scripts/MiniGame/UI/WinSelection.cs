@@ -17,11 +17,9 @@ namespace MiniGame
             switch (_dropdown.value)
             {
                 case 0:
-                    print("0");
                     GameOver.SetConditionWin(new WinToAllColorDestroy());
                     break;
                 case 1:
-                    print("1");
                     GameOver.SetConditionWin(new WinToOneColorDestroy());
                     break;
             }

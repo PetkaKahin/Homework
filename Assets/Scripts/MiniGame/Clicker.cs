@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace MiniGame
 {
     public class Clicker : MonoBehaviour
     {
+        public event Action<BallType> EventDestroyedReturnBallType;
+        public event Action EventDestroyed;
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -16,6 +20,9 @@ namespace MiniGame
                 {
                     if (hitInfo.collider.gameObject.TryGetComponent(out Ball ball))
                     {
+                        EventDestroyedReturnBallType?.Invoke(ball.Type);
+                        EventDestroyed?.Invoke();
+
                         ball.DestroyedBall();
                     }
                 }

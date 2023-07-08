@@ -5,7 +5,7 @@ namespace MiniGame
     public class WinToOneColorDestroy : IConditionEndGame
     {
         private BallType? _ballTypeForWin = null;
-        private BallType? _destroyedBallType = null;
+        private BallType _destroyedBallType;
 
         private int _countBallType = 0;
         private int _countDestroyedBallType = 0;
@@ -14,8 +14,11 @@ namespace MiniGame
 
         public BallHeandler BallHeandler { get; private set; }
 
-        public void ChekEndWin()
+        public void ChekGameEnd()
         {
+            SetDestroyBallType(BallHeandler.DestroedBallType);
+            _countDestroyedBallType = BallHeandler.CountDestroyedBalls;
+
             if (_destroyedBallType == _ballTypeForWin)
             {
                 if (_countBallType == _countDestroyedBallType)
@@ -32,39 +35,17 @@ namespace MiniGame
         public void SetBallHeandler(BallHeandler ballHeandler)
         {
             BallHeandler = ballHeandler;
-
-            OffSubcription();
-            OnSubcription();
         }
 
-        private void SetDestroedBall(Ball ball)
-        {
-            _destroyedBallType = ball.Type;
-            _countDestroyedBallType++;
-        }
-
-        private void SetBallTypeForWin(Ball ball)
+        private void SetDestroyBallType(BallType ballType)
         {
             if (_ballTypeForWin == null)
-                _ballTypeForWin = ball.Type;
+            {
+                _ballTypeForWin = ballType;
+                _countBallType = BallHeandler.CountBallOfBallType(ballType);
+            }
 
-            Ball.EventDestroyedActionReturnBall -= SetBallTypeForWin;
-
-            for (int i = 0; i < BallHeandler.Balls.Count; i++)
-                if (BallHeandler.Balls[i].Type == _ballTypeForWin)
-                    _countBallType++;
-        }
-
-        private void OnSubcription()
-        {
-            Ball.EventDestroyedActionReturnBall += SetBallTypeForWin;
-            Ball.EventDestroyedActionReturnBall += SetDestroedBall;
-        }
-
-        private void OffSubcription()
-        {
-            Ball.EventDestroyedActionReturnBall -= SetBallTypeForWin;
-            Ball.EventDestroyedActionReturnBall -= SetDestroedBall;
+            _destroyedBallType = ballType;
         }
     }
 }

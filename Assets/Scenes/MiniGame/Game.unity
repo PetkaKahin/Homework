@@ -1061,6 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fb4ad62b1a9b14fb6185d6df4e029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cliker: {fileID: 1529302221}
   <Balls>k__BackingField:
   - {fileID: 321685165}
   - {fileID: 1704064407}
@@ -1084,6 +1085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballHeandler: {fileID: 1529302223}
+  _clicker: {fileID: 1529302221}
   _endGameMenu: {fileID: 1529302225}
 --- !u!114 &1529302225
 MonoBehaviour:

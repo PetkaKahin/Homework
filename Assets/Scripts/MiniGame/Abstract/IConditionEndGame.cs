@@ -11,7 +11,7 @@ namespace MiniGame
 
         BallHeandler BallHeandler { get; }
 
-        void ChekEndWin();
+        void ChekGameEnd();
         void SetBallHeandler(BallHeandler ballHeandler);
     }
 }
