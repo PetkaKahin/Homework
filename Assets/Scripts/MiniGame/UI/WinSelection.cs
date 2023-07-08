@@ -1,32 +1,31 @@
-using MiniGame;
 using TMPro;
 using UnityEngine;
 
-public class WinSelection : MonoBehaviour
+namespace MiniGame
 {
-    [SerializeField] private TMP_Dropdown _dropdown;
-
-    private void Start()
+    public class WinSelection : MonoBehaviour
     {
-        DB.SetConditionsWin(new WinAll());
-    }
+        [SerializeField] private TMP_Dropdown _dropdown;
 
-    public void PutWinSelection()
-    {
-        switch (_dropdown.value)
+        private void Start()
         {
-            case 0:
-                DB.SetConditionsWin(new WinAll());
-                break;
-            case 1:
-                DB.SetConditionsWin(new WinRed());
-                break;
-            case 2:
-                DB.SetConditionsWin(new WinGreen());
-                break;
-            case 3:
-                DB.SetConditionsWin(new WinWhite());
-                break;
+            GameOver.SetConditionWin(new WinToAllColorDestroy());
+        }
+
+        public void PutWinSelection()
+        {
+            switch (_dropdown.value)
+            {
+                case 0:
+                    print("0");
+                    GameOver.SetConditionWin(new WinToAllColorDestroy());
+                    break;
+                case 1:
+                    print("1");
+                    GameOver.SetConditionWin(new WinToOneColorDestroy());
+                    break;
+            }
         }
     }
 }
+

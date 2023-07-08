@@ -1,21 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MiniGame
 {
     public class BallHeandler : MonoBehaviour
     {
-        [SerializeField] private DB _db;
+        [field: SerializeField] public List<Ball> Balls { get; private set; } = new List<Ball>();
 
-        private void Start()
+        public void CreateBall(BallType ballType, Transform parent) // типа будет использоваться в будущем, например при генерации шариков
         {
-            Ball.DestroyAction = DestroyBall;
-        }
+            Balls.Add(new Ball(ballType));
 
-        private void DestroyBall(BallType ballType)
-        {
-            _db.AddDestroyBall(ballType);
-
-            WinChecker.CheckWin(DB.ConditionsWin);
+            Instantiate(Balls[Balls.Count], parent);
         }
     }
 }

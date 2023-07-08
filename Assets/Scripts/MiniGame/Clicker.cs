@@ -16,7 +16,7 @@ namespace MiniGame
                 {
                     if (hitInfo.collider.gameObject.TryGetComponent(out Ball ball))
                     {
-                        ball.DestroyBall();
+                        ball.DestroyedBall();
                     }
                 }
             }
