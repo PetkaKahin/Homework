@@ -10,23 +10,6 @@ namespace Lesson_NPC
 
         private readonly Transform _npcTransform;
 
-        public NPCData(float MaxStamina, float MinStamina, Transform npcTransform, IMover mover) 
-        {
-            _maxStamina = MaxStamina;
-            _minStamina = MinStamina;
-
-            _npcTransform = npcTransform;
-
-            Stamina = _maxStamina;
-
-            Mover = mover;
-
-            if (Stamina == _maxStamina)
-                IsRelax = true;
-            else 
-                IsRelax = false;
-        }
-
         public readonly IMover Mover;
 
         public bool IsRelax { get; private set; }
@@ -40,7 +23,24 @@ namespace Lesson_NPC
         public Vector3 RelaxPosition { get; set; }
         public Vector3 CurrentPosition { get => _npcTransform.position; }
 
-        public void SetSpeed (float speed)
+        public NPCData(float MaxStamina, float MinStamina, Transform npcTransform, IMover mover)
+        {
+            _maxStamina = MaxStamina;
+            _minStamina = MinStamina;
+
+            _npcTransform = npcTransform;
+
+            Stamina = _maxStamina;
+
+            Mover = mover;
+
+            if (Stamina == _maxStamina)
+                IsRelax = true;
+            else
+                IsRelax = false;
+        }
+
+        public void SetSpeed(float speed)
         {
             if (speed < 0)
                 throw new ArgumentOutOfRangeException(nameof(speed));

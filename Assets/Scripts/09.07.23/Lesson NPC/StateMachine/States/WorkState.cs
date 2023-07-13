@@ -13,7 +13,7 @@ namespace Lesson_NPC
 
         public override void Exit()
         {
-            Debug.Log($"Я устал... Я ухожу)");
+            Debug.Log($"Я устал... Я ухожу...");
         }
 
         public override void Update()

@@ -4,7 +4,7 @@ namespace Lesson_NPC
 {
     public class WalkState : BaseState
     {
-        private const float InaccuracyDistance = 0.1f; // погрешность
+        private const float InaccuracyDistance = 0.1f;
 
         public WalkState(NPCData npcData, IStateSwither stateSwither) : base(npcData, stateSwither) { }
 
