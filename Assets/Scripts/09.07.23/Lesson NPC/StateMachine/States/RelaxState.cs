@@ -18,9 +18,9 @@ namespace Lesson_NPC
 
         public override void Update()
         {
-            if (!NpcData.TryRegenerationStamina(NpcData.SpeedRegenerationStamina * Time.deltaTime))
+            if (NpcData.TryRegenerationStamina(NpcData.SpeedRegenerationStamina * Time.deltaTime) == false)
             {
-                StateSwither.SwitchState(new WalkState(NpcData, StateSwither));
+                StateSwither.SwitchState<WalkState>();
             }
         }
     }

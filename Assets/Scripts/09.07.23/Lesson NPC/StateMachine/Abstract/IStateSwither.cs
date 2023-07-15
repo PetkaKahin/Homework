@@ -2,6 +2,6 @@
 {
     public interface IStateSwither
     {
-        void SwitchState(IState newState);
+        void SwitchState<T>() where T : IState;
     }
 }

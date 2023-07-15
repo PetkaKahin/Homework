@@ -6,10 +6,17 @@ namespace Lesson_NPC
     {
         private const float InaccuracyDistance = 0.1f;
 
-        public WalkState(NPCData npcData, IStateSwither stateSwither) : base(npcData, stateSwither) { }
-
         private Vector3 _target;
-        private BaseState _nextState;
+        private IMover _npc;
+
+
+
+        public WalkState(NPCData npcData, IStateSwither stateSwither, IMover npc) : base(npcData, stateSwither)
+        {
+            _npc = npc;
+        }
+
+
 
         public override void Enter()
         {
@@ -17,13 +24,11 @@ namespace Lesson_NPC
             {
                 Debug.Log("Иду на завод :(");
                 _target = NpcData.WorkPosition;
-                _nextState = new WorkState(NpcData, StateSwither);
             }
             else
             {
                 Debug.Log("УРАААА! Лечу домой!");
                 _target = NpcData.RelaxPosition;
-                _nextState = new RelaxState(NpcData, StateSwither);
             }
         }
 
@@ -37,11 +42,14 @@ namespace Lesson_NPC
             if (Vector3.Distance(NpcData.CurrentPosition, _target) > InaccuracyDistance)
             {
                 Vector3 direction = _target * NpcData.Speed * Time.deltaTime;
-                NpcData.Mover.Move(direction);
+                _npc.Move(direction);
             }
             else
             {
-                StateSwither.SwitchState(_nextState);
+                if (NpcData.IsRelax)
+                    StateSwither.SwitchState<WorkState>();
+                else
+                    StateSwither.SwitchState<RelaxState>();
             }
         }
     }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 namespace Lesson_NPC
@@ -22,7 +24,7 @@ namespace Lesson_NPC
 
         private void Start()
         {
-            _npcData = new NPCData(_fullStamina, MinStamina, transform, this);
+            _npcData = new NPCData(_fullStamina, MinStamina, transform);
             
             _npcData.SetSpeed(_speed);
             _npcData.SetSpeedRegenerationStamina(_staminaRegeneration);
@@ -31,7 +33,7 @@ namespace Lesson_NPC
             _npcData.WorkPosition = _workPosition.position;
             _npcData.RelaxPosition = _realaxPosition.position;
 
-            _stateMachine = new NPCStateMachine(_npcData);
+            _stateMachine = new NPCStateMachine(_npcData, this);
         }
 
         private void Update()

@@ -10,9 +10,9 @@ namespace Lesson_NPC
 
         private readonly Transform _npcTransform;
 
-        public readonly IMover Mover;
 
-        public bool IsRelax { get; private set; }
+
+        public bool IsRelax => Stamina == _maxStamina ? true : false;
 
         public float Stamina { get; private set; }
         public float Speed { get; private set; }
@@ -21,9 +21,11 @@ namespace Lesson_NPC
 
         public Vector3 WorkPosition { get; set; }
         public Vector3 RelaxPosition { get; set; }
-        public Vector3 CurrentPosition { get => _npcTransform.position; }
+        public Vector3 CurrentPosition => _npcTransform.position;
 
-        public NPCData(float MaxStamina, float MinStamina, Transform npcTransform, IMover mover)
+
+
+        public NPCData(float MaxStamina, float MinStamina, Transform npcTransform)
         {
             _maxStamina = MaxStamina;
             _minStamina = MinStamina;
@@ -31,13 +33,6 @@ namespace Lesson_NPC
             _npcTransform = npcTransform;
 
             Stamina = _maxStamina;
-
-            Mover = mover;
-
-            if (Stamina == _maxStamina)
-                IsRelax = true;
-            else
-                IsRelax = false;
         }
 
         public void SetSpeed(float speed)
@@ -73,7 +68,6 @@ namespace Lesson_NPC
             else
             {
                 Stamina = _maxStamina;
-                IsRelax = true;
                 return false;
             }
 
@@ -82,8 +76,6 @@ namespace Lesson_NPC
 
         public bool TrySpendStamina(float count)
         {
-            IsRelax = false;
-            
             if (Stamina - count > _minStamina)
             {
                 Stamina -= count;
