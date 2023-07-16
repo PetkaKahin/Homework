@@ -10,8 +10,6 @@ namespace Lesson_NPC
 
         private readonly Transform _npcTransform;
 
-
-
         public bool IsRelax => Stamina == _maxStamina ? true : false;
 
         public float Stamina { get; private set; }
@@ -22,8 +20,6 @@ namespace Lesson_NPC
         public Vector3 WorkPosition { get; set; }
         public Vector3 RelaxPosition { get; set; }
         public Vector3 CurrentPosition => _npcTransform.position;
-
-
 
         public NPCData(float MaxStamina, float MinStamina, Transform npcTransform)
         {

@@ -9,14 +9,10 @@ namespace Lesson_NPC
         private Vector3 _target;
         private IMover _npc;
 
-
-
         public WalkState(NPCData npcData, IStateSwither stateSwither, IMover npc) : base(npcData, stateSwither)
         {
             _npc = npc;
         }
-
-
 
         public override void Enter()
         {
@@ -47,9 +43,13 @@ namespace Lesson_NPC
             else
             {
                 if (NpcData.IsRelax)
+                {
                     StateSwither.SwitchState<WorkState>();
+                }
                 else
+                {
                     StateSwither.SwitchState<RelaxState>();
+                }
             }
         }
     }

@@ -19,9 +19,7 @@ namespace Lesson_NPC
         public override void Update()
         {
             if (NpcData.TrySpendStamina(NpcData.SpeedFatigue * Time.deltaTime) == false)
-            {
                 StateSwither.SwitchState<WalkState>();
-            }
         }
     }
 }
