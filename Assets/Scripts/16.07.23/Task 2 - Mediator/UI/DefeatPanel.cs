@@ -4,8 +4,8 @@ namespace Mediator
 {
     public class DefeatPanel : MonoBehaviour
     {
-        public void Enter() => gameObject.SetActive(true);
+        public void Show() => gameObject.SetActive(true);
 
-        public void Exit() => gameObject.SetActive(false);
+        public void Hide() => gameObject.SetActive(false);
     }
 }

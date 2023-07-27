@@ -1,117 +1,90 @@
 using System;
-using System.Collections;
+using Task_2___Mediator;
 using UnityEngine;
 
 namespace Mediator
 {
     public class Player : BasePlayer
     {
-        private const int DefaultLevel = 1;
-
         [SerializeField] private int _defaultHealth;
         [SerializeField] private int _healthRegeniration;
         [SerializeField] private int _defaulExperience;
 
         [SerializeField] private PlayerStatsMediator _playerStatsMediator;
 
-        private float _health;
+        private IHealth _playerHealth;
+        private IExperience _playerExperience;
 
-        private int _maxHealth;
-        private int _maxExperience;
-        private int _experience;
-        private int _level;
+        private float _health => _playerHealth.Health;
+        private float _maxHealth => _playerHealth.MaxHealth;
+        private float _experience => _playerExperience.Experience;
+        private float _maxExperience => _playerExperience.MaxExperience;
 
-        private bool _isRegeneration;
+        private int _level => _playerExperience.Level;
 
-        public override event Action Died; 
+        public override event Action Died;
 
-        private void Start()
+        private void Awake()
         {
             ResetStats();
         }
 
+        private void OnEnable()
+        {
+            _playerExperience.LeveledUp += LevelUp;
+
+            _playerHealth.Died += Die;
+            _playerHealth.Healed += Heal;
+        }
+
+        private void OnDisable()
+        {
+            _playerExperience.LeveledUp -= LevelUp;
+
+            _playerHealth.Died -= Die;
+            _playerHealth.Healed -= Heal;
+        }
+
         public override void ResetStats()
         {
-            _isRegeneration = true;
-            StartCoroutine(Regeneration());
+            _playerHealth = new PlayerHealth(_defaultHealth, _healthRegeniration, this);
+            _playerExperience = new PlayerExperience(_defaultHealth);
 
-            _health = _defaultHealth;
-
-            _maxHealth = _defaultHealth;
-            _maxExperience = _defaulExperience;
-            _level = DefaultLevel;
-
-            _playerStatsMediator.SetHealth(_health, _maxHealth);
-            _playerStatsMediator.SetMaxHealth(_maxHealth);
-            _playerStatsMediator.SetExperience(_experience, _maxExperience);
-            _playerStatsMediator.SetMaxExperience(_maxExperience);
+            _playerStatsMediator.SetHealth(_health, (int)_maxHealth);
+            _playerStatsMediator.SetMaxHealth((int)_maxHealth);
+            _playerStatsMediator.SetExperience(_experience, (int)_maxExperience);
+            _playerStatsMediator.SetMaxExperience((int)_maxExperience);
             _playerStatsMediator.SetLevel(_level);
+
+            OnDisable();
+            OnEnable();
         }
 
         public override void TakeExperience(int experience)
         {
-            if (experience < 0)
-                throw new ArgumentOutOfRangeException(nameof(experience));
-
-            _experience += experience;
-
-            if (_experience >= _maxExperience)
-                LevelUp();
-
-            _playerStatsMediator.SetExperience(_experience, _maxExperience);
+            _playerExperience.TakeExpirience(experience);
+            _playerStatsMediator.SetExperience(_experience, (int)_maxExperience);
         }
 
         public override void TakeDamage(int damage)
         {
-            if (damage < 0)
-                throw new ArgumentOutOfRangeException(nameof(damage));
-
-            _health -= damage;
-
-            if (_health <= 0)
-                Die();
+            _playerHealth.TakeDamage(damage);
+            _playerStatsMediator.SetHealth(_health, (int)_maxHealth);
         }
 
         private void LevelUp()
         {
-            _experience -= (_maxExperience);
-
-            _level++;
-
-            _maxHealth *= _level;
-            _maxExperience *= _level;
-
+            _playerStatsMediator.SetMaxHealth((int)_maxHealth);
+            _playerStatsMediator.SetExperience(_experience, (int)_maxExperience);
+            _playerStatsMediator.SetMaxExperience((int)_maxExperience);
             _playerStatsMediator.SetLevel(_level);
-            _playerStatsMediator.SetMaxExperience(_maxExperience);
-            _playerStatsMediator.SetMaxHealth(_maxHealth);
+
+            _playerHealth.SetMaxHealth(_maxHealth * _level);
         }
 
-        private IEnumerator Regeneration()
-        {
-            while (_isRegeneration)
-            {
-                float regeniration = _healthRegeniration * Time.deltaTime;
+        private void Heal() => _playerStatsMediator.SetHealth(_health, (int) _maxHealth);
 
-                if (_health <= _maxHealth)
-                {
-                    _health += regeniration;
-
-                    if (_health > _maxHealth)
-                        _health = _maxHealth;
-
-                    _playerStatsMediator.SetHealth(_health, _maxHealth);
-                }
-
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
-        }
-
-        private void Die()
-        {
-            _isRegeneration = false;
-
-            Died?.Invoke();
-        }
+        private void Die() => Died?.Invoke();
     }
 }
 

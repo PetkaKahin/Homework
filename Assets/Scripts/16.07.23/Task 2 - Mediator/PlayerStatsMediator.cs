@@ -8,9 +8,9 @@ namespace Mediator
 
         public void SetHealth(float health, int maxHeath) => _statsPanel.HealthUpdate(health, maxHeath);
             
-        public void SetMaxHealth(float value) => _statsPanel.MaxHealthUpdate(value);
+        public void SetMaxHealth(int value) => _statsPanel.MaxHealthUpdate(value);
 
-        public void SetExperience(int experience, int maxExperience) => _statsPanel.ExperienceUpdate(experience, maxExperience);
+        public void SetExperience(float experience, int maxExperience) => _statsPanel.ExperienceUpdate((int)experience, maxExperience);
 
         public void SetMaxExperience(int value) => _statsPanel.MaxExperienceUpdate(value);
 

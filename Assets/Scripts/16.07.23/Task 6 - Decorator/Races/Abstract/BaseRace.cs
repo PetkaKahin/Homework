@@ -2,7 +2,7 @@
 
 namespace Task_6___Decorator
 {
-    public class BaseRace : ICharacterStats
+    public abstract class BaseRace : ICharacterStats
     {
         private BaseRaceConfig _config;
 
@@ -12,13 +12,13 @@ namespace Task_6___Decorator
             Health = MaxHealth;
         }
 
-        public int Agility => _config.Agility;
+        public virtual int Agility => _config.Agility;
 
-        public int Intellect => _config.Intellect;
+        public virtual int Intellect => _config.Intellect;
 
-        public int MaxHealth => _config.MaxHealth;
+        public virtual int MaxHealth => _config.MaxHealth;
 
-        public int Health { get; private set; }
+        public virtual int Health { get; private set; }
 
         public virtual void Heal(int value)
         {

@@ -20,12 +20,12 @@ namespace Mediator
         public void Restart()
         {
             _player.ResetStats();
-            _defeatPanel.Exit();
+            _defeatPanel.Hide();
         }
 
         private void Defeat()
         {
-            _defeatPanel.Enter();
+            _defeatPanel.Show();
         }
     }
 }

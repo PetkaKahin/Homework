@@ -11,16 +11,16 @@
             Config = config;
         }
 
-        public int Agility => Stats.Agility + Config.AdditionalAgility;
+        public virtual int Agility => Stats.Agility + Config.AdditionalAgility;
 
-        public int Intellect => Stats.Intellect + Config.AdditionalIntellect;
+        public virtual int Intellect => Stats.Intellect + Config.AdditionalIntellect;
 
-        public int MaxHealth => Stats.MaxHealth + Config.AdditionalHealth;
+        public virtual int MaxHealth => Stats.MaxHealth + Config.AdditionalHealth;
 
-        public int Health => Stats.Health + Config.AdditionalHealth;
+        public virtual int Health => Stats.Health + Config.AdditionalHealth;
 
-        public void Heal(int value) => Stats.Heal(value);
+        public virtual void Heal(int value) => Stats.Heal(value);
 
-        public void TakeDamage(int damage) => Stats.TakeDamage(damage);
+        public virtual void TakeDamage(int damage) => Stats.TakeDamage(damage);
     }
 }

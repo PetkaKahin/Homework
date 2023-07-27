@@ -23,14 +23,14 @@ namespace Mediator
             ScrollbarUpdate(_healthScrollbar, health, maxHeath);
         }
 
-        public void ExperienceUpdate(int experience, int maxExperience) 
+        public void ExperienceUpdate(float experience, int maxExperience) 
         {
-            TextUpdate(_experienceText, experience.ToString());
+            TextUpdate(_experienceText, ((int)experience).ToString());
 
             ScrollbarUpdate(_experienceScrollbar, experience, maxExperience);
         }
 
-        public void MaxHealthUpdate(float maxHealth) => TextUpdate(_maxHealthText, maxHealth.ToString());
+        public void MaxHealthUpdate(int maxHealth) => TextUpdate(_maxHealthText, maxHealth.ToString());
 
         public void MaxExperienceUpdate(int maxExperience) => TextUpdate(_maxExperienceText, maxExperience.ToString());
 

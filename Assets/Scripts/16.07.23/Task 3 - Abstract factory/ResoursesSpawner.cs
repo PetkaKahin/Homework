@@ -4,19 +4,13 @@ namespace Task_3___Abstract_factory
 {
     public class ResoursesSpawner : MonoBehaviour
     {
-        [SerializeField] private Transform _ParentSpawnPoin;
+        [SerializeField] private Transform _parentSpawnPoin;
 
-        [SerializeField] private AbstractResoursesFactory _Factory;
+        [SerializeField] private AbstractResoursesFactory _factory;
 
-        public void SpawnEnergy()
-        {
-            _Factory.GetEnergy(_ParentSpawnPoin);
-        }
+        public void SpawnEnergy() => _factory.GetEnergy(_parentSpawnPoin);
 
-        public void SpawnCoin()
-        {
-            _Factory.GetCoin(_ParentSpawnPoin);
-        }
+        public void SpawnCoin() => _factory.GetCoin(_parentSpawnPoin);
     }
 }
 

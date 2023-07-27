@@ -20,7 +20,7 @@ namespace Task_6___Decorator
 
         private void Start()
         {
-            _characterStats = new ArmorHealth(new Thief(new BaseRace(_raceConfig), _specializationConfig), (ArmorHeathConfig)_passiveAbilityConfig);
+            _characterStats = new ArmorHealth(new Thief(new Human(_raceConfig), _specializationConfig), (ArmorHeathConfig)_passiveAbilityConfig);
         }
 
         public void Heal(int value)
